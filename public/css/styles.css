@@ -1,6 +1,237 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: white;
+  border-bottom: 3px solid #00AEEF; 
+}
+
+.siteName a {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+#tools a {
+  font-size: 14px;
+  color: #004080;
+  text-decoration: none;
+}
+
+/* Navigation Bar */
+nav {
+  background-color: #1a1a1a; 
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+nav ul li:hover {
+  background-color: #333;
+  border-radius: 5px;
+}
+
+/* Mobile-First Styles */
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  text-align: center;
+}
+
+/* Header */
+.header-container {
+  background-color: #004aad;
+  color: white;
+  padding: 1rem;
+}
+
+/* Hero Section */
+.hero {
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap; /* Ensures content stacks on smaller screens */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.hero .highlight {
+  color: #004aad;
+  font-weight: bold;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin-top: 1rem;
+}
+
+
+.reviews, .upgrades {
+  padding: 1rem;
+  text-align: center;
+}
+
+.reviews h2, .upgrades h2 {
+  color: #004aad;
+  margin-bottom: 0.5rem;
+}
+
+.reviews ul {
+  list-style: none;
+  padding: 0;
+}
+
+.reviews li {
+  background: white;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Upgrades Grid */
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.upgrade-item {
+  background: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.upgrade-item img {
+  max-width: 100%;
+}
+
+.car-details {
+  text-align: left;
+  width: 100%;
+  max-width: 250px;
+}
+
+.car-title {
+  color: #007bb5;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.features {
+  list-style: none;
+  padding: 0;
+  font-size: 16px;
+  color: #005f99;
+}
+
+.own-today-image {
+  width: 100%;
+  max-width: 200px; 
+  display: block;
+  margin-top: 10px;
+}
+
+/* Footer */
+footer {
+  color: black;
+  padding: 1rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+/* Ensure Upgrades Section is Centered */
+.upgrades {
+  text-align: center;
+}
+
+.upgrades-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.upgrade-item {
+  background-color: #007bb5; 
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.upgrade-item img {
+  width: 50px; 
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.upgrade-item p {
+  font-size: 14px;
+  font-weight: bold;
+  color: white; 
+  margin-top: 5px;
+}
+
+
+@media screen and (min-width: 768px) {
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .hero-image {
+    max-width: 50%;
+  }
+
+  .reviews, .upgrades {
+    max-width: 600px;
+    margin: auto;
+  }
+
+  .upgrades-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
 }
