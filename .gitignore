@@ -12,10 +12,4 @@ node_modules
 # will be manually created by you or dynamically # created on the hosting server
 .env
 
-# .DS_Store is only for Mac users
-<<<<<<< HEAD
-**/.DS_Store
-README.md
-=======
-**/.DS_Store
->>>>>>> 5d814ff4679757750d52961cfa0663d6fd17f63b
+
