@@ -243,3 +243,139 @@ footer {
   box-sizing: border-box;
 }
 
+
+
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  text-align: center;
+  padding: 10px;
+}
+
+/* Header */
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background-color: white;
+  border-bottom: 3px solid #00AEEF;
+}
+
+.siteName a {
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+#tools a {
+  font-size: 14px;
+  color: #004080;
+  text-decoration: none;
+}
+
+/* Navigation */
+nav {
+  background-color: #1a1a1a;
+  padding: 10px 0;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline-block;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+nav ul li:hover {
+  background-color: #333;
+  border-radius: 5px;
+}
+
+/* Page Title */
+h1 {
+  font-size: 2rem;
+  margin: 20px 0;
+  color: #004aad;
+}
+
+/* Message Section */
+.message {
+  margin: 10px auto;
+  padding: 10px;
+  max-width: 600px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #d9534f;
+  border-radius: 5px;
+  display: none; /* Future use */
+}
+
+/* Inventory Grid */
+.inventory-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.inventory-item {
+  background: white;
+  padding: 15px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.inventory-item img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.inventory-item h2 {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  color: #007bb5;
+}
+
+.inventory-item p {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Footer */
+footer {
+  color: black;
+  padding: 1rem;
+  margin-top: 2rem;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+/* Responsive Design */
+@media screen and (min-width: 768px) {
+  .inventory-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
