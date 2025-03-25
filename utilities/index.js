@@ -57,4 +57,31 @@ Util.buildClassificationGrid = async function (data) {
   return grid
 }
 
+/* ******************************
+ * Build individual vehicle HTML
+ * ****************************** */
+Util.buildVehicleHTML = function (vehicle) {
+  return `
+    <div class="vehicle-details">
+      <h2>${vehicle.inv_make} ${vehicle.inv_model}</h2>
+      <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}" />
+      <p><strong>Year:</strong> ${vehicle.inv_year}</p>
+      <p><strong>Price:</strong> $${new Intl.NumberFormat("en-US").format(vehicle.inv_price)}</p>
+      <p><strong>Description:</strong> ${vehicle.inv_description}</p>
+    </div>
+  `
+}
+
+// Make sure it's included in the exports
+module.exports = { 
+  getNav: Util.getNav, 
+  buildClassificationGrid: Util.buildClassificationGrid,
+  buildVehicleHTML: Util.buildVehicleHTML, // ✅ Add this
+  handleErrors: Util.handleErrors
+}
+
+
+
+Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
+
 module.exports = Util
