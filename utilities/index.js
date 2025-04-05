@@ -1,32 +1,34 @@
-const invModel = require("../models/inventory-model")
-const Util = {}
+const invModel = require("../models/inventory-model");
+const Util = {};
 
-/* ************************
+/* ******************************
  * Constructs the nav HTML unordered list
- ************************** */
-Util.getNav = async function (req, res, next) {
-  let data = await invModel.getClassifications()
-  let list = "<ul>"
-  list += '<li><a href="/" title="Home page">Home</a></li>'
-  data.rows.forEach((row) => {
-    list += "<li>"
-    list +=
-      '<a href="/inv/type/' +
-      row.classification_id +
-      '" title="See our inventory of ' +
-      row.classification_name +
-      ' vehicles">' +
-      row.classification_name +
-      "</a>"
-    list += "</li>"
-  })
-  list += "</ul>"
-  return list
-}
+ ****************************** */
+Util.getNav = async function () { 
+  try {
+    const data = await invModel.getClassifications();
+    if (!data || data.length === 0) {
+      console.error("getNav Error: No classifications found.");
+      return "<ul><li>No classifications available</li></ul>";
+    }
 
-/* **************************************
- * Build the classification view HTML
- * ************************************ */
+    let list = "<ul>";
+    list += '<li><a href="/" title="Home page">Home</a></li>';
+    data.forEach((row) => {
+      list += `<li>
+                 <a href="/inv/type/${row.classification_id}" title="See our inventory of ${row.classification_name} vehicles">
+                   ${row.classification_name}
+                 </a>
+               </li>`;
+    });
+    list += "</ul>";
+    return list;
+  } catch (error) {
+    console.error("getNav Error:", error);
+    return "<ul><li>Error loading navigation</li></ul>";
+  }
+};
+
 Util.buildClassificationGrid = async function (data) {
   let grid = "" // Initialize grid to prevent "undefined" errors
   if (data.length > 0) {
@@ -56,10 +58,6 @@ Util.buildClassificationGrid = async function (data) {
   }
   return grid
 }
-
-/* ******************************
- * Build individual vehicle HTML
- * ****************************** */
 Util.buildVehicleHTML = function (vehicle) {
   return `
     <div class="vehicle-details">
@@ -72,16 +70,32 @@ Util.buildVehicleHTML = function (vehicle) {
   `
 }
 
-// Make sure it's included in the exports
-module.exports = { 
-  getNav: Util.getNav, 
-  buildClassificationGrid: Util.buildClassificationGrid,
-  buildVehicleHTML: Util.buildVehicleHTML, // ✅ Add this
-  handleErrors: Util.handleErrors
-}
+/* ******************************
+ * Build classification list for select dropdown
+ ****************************** */
+Util.buildClassificationList = async function () {
+  try {
+    let data = await invModel.getClassifications();
+    console.log("✅ Classification List Data:", data); // Debugging log
+
+    if (!Array.isArray(data) || data.length === 0) {
+      console.warn("⚠️ No classifications found.");
+      return [];  // Return empty array if no data
+    }
+
+    // Return the array of classification data, not HTML
+    return data;  
+  } catch (error) {
+    console.error("❌ Error fetching classifications:", error);
+    return [];  // Return empty array on error
+  }
+};
 
 
+Util.handleErrors = (fn) => (req, res, next) => 
+  Promise.resolve(fn(req, res, next)).catch(next);
 
-Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next)
-
-module.exports = Util
+/* ******************************
+ * Exporting the Util object properly
+ ****************************** */
+module.exports = Util;

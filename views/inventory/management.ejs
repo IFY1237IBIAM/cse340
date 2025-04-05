@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/management.css">
+
+<h1>Inventory Management</h1>
+
+<!-- Flash messages -->
+<% if (messages.success) { %>
+  <div class="flash-messages-success">
+    <% messages.success.forEach(msg => { %>
+      <p class="flash-message"><%= msg %></p>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (messages.error) { %>
+  <div class="flash-messages-error">
+    <% messages.error.forEach(msg => { %>
+      <p class="flash-message"><%= msg %></p>
+    <% }) %>
+  </div>
+<% } %>
+
+<ul class="nav-buttons">
+  <li><a href="/inv/add-classification">Add New Classification</a></li>
+  <li><a href="/inv/add-inventory">Add New Inventory</a></li>
+</ul>

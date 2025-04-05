@@ -1,0 +1,72 @@
+General Form Styling
+.add-classification-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .add-classification-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+
+  
+ 
+
+  .add-classification-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .add-classification-form p {
+    color: #333;
+  }
+  .add-classification-form label {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .add-classification-form {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  
+  .add-classification-form input:invalid {
+    border-color: red;
+  }
+  
+  .add-classification-form input:valid {
+    border-color: green;
+  }
+
+  .add-classification-form button {
+    background-color: #007bff;
+    color: black;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .add-classification-form button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  @media (min-width: 768px) {
+    .add-classification-container {
+      max-width: 500px;
+      padding: 2rem;
+    }
+  }
+  

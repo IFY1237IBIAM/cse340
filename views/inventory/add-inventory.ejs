@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/css/add-inventory.css">
+
+
+<!-- Flash Messages -->
+<% if (messages.success) { %>
+  <div class="flash-messages-success">
+    <% messages.success.forEach(msg => { %>
+      <p class="flash-message"><%= msg %></p>
+    <% }) %>
+  </div>
+<% } %>
+
+<% if (messages.error) { %>
+  <div class="flash-messages-error">
+    <% messages.error.forEach(msg => { %>
+      <p class="flash-message"><%= msg %></p>
+    <% }) %>
+  </div>
+<% } %>
+
+<h1><%= title %></h1>
+<form action="/inv/add-inventory" method="POST">
+  <label for="classification_id">Classification:</label>
+  <select name="classification_id" id="classification_id" required>
+    <option value="">Select a Classification</option>
+    <% if (Array.isArray(classificationList)) { %>
+      <% classificationList.forEach(classification => { %>
+        <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
+      <% }) %>
+    <% } else { %>
+      <option value="">No Classifications Available</option>
+    <% } %>
+  </select>
+
+  <label for="inv_make">Make:</label>
+  <input type="text" name="inv_make" id="inv_make" value="<%= inv_make %>" required minlength="3"
+         placeholder="Enter vehicle make (min. 3 characters)" />
+
+  <label for="inv_model">Model:</label>
+  <input type="text" name="inv_model" id="inv_model" value="<%= inv_model %>" required minlength="3"
+         placeholder="Enter vehicle model (min. 3 characters)" />
+
+  <label for="inv_year">Year:</label>
+  <input type="number" name="inv_year" id="inv_year" value="<%= inv_year %>" required 
+         min="1900" max="2099" placeholder="Enter 4-digit year (e.g. 2023)" />
+
+  <label for="inv_description">Description:</label>
+  <textarea name="inv_description" id="inv_description" required
+            placeholder="Enter a brief description of the vehicle"><%= inv_description %></textarea>
+
+  <label for="inv_price">Price:</label>
+  <input type="number" name="inv_price" id="inv_price" value="<%= inv_price %>" required step="0.01"
+         placeholder="Enter price (e.g. 15000 or 15000.99)" />
+
+  <label for="inv_miles">Miles:</label>
+  <input type="number" name="inv_miles" id="inv_miles" value="<%= inv_miles %>" required step="1"
+         placeholder="Enter mileage in digits only" />
+
+  <label for="inv_color">Color:</label>
+  <input type="text" name="inv_color" id="inv_color" value="<%= inv_color %>" required
+         placeholder="Enter color (e.g. Red, Black)" />
+
+  <label for="inv_thumbnail">Thumbnail:</label>
+  <input type="text" name="inv_thumbnail" id="inv_thumbnail" value="<%= inv_thumbnail || '/images/no-image.png' %>" required
+         placeholder="Thumbnail image path (e.g. /images/thumb.png)" />
+
+  <label for="inv_image">Image Path:</label>
+  <input type="text" name="inv_image" id="inv_image" value="<%= inv_image || '/images/no-image.png' %>" required
+         placeholder="Full image path (e.g. /images/car.png)" />
+
+  <button type="submit">Add Vehicle</button>
+</form>
