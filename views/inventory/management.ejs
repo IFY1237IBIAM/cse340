@@ -23,3 +23,28 @@
   <li><a href="/inv/add-classification">Add New Classification</a></li>
   <li><a href="/inv/add-inventory">Add New Inventory</a></li>
 </ul>
+
+<!-- 👇 Inventory Management Section -->
+<h2>Manage Inventory</h2>
+<p>Choose a classification to view inventory items</p>
+
+<label for="classification_id">Classification:</label>
+<select name="classification_id" id="classification_id" required>
+  <option value="">Select a Classification</option>
+  <% if (Array.isArray(classificationList)) { %>
+    <% classificationList.forEach(classification => { %>
+      <option value="<%= classification.classification_id %>"><%= classification.classification_name %></option>
+    <% }) %>
+  <% } else { %>
+    <option value="">No Classifications Available</option>
+  <% } %>
+</select>
+
+<!-- Empty table for JavaScript to inject inventory data -->
+<table id="inventoryDisplay"></table>
+
+<!-- Fallback message if JavaScript is disabled -->
+<noscript>JavaScript must be enabled to use this page.</noscript>
+
+<!-- Link to the JS file that handles classification selection and inventory rendering -->
+<script src="../../js/inventory.js"></script>

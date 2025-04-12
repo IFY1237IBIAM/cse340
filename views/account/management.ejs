@@ -1,0 +1,27 @@
+<main>
+  <h1>Account Management</h1>
+
+  <% if (messages && messages.notice) { %>
+    <div class="flash-message"><%= messages.notice %></div>
+  <% } %>
+
+  <% if (errors && errors.length > 0) { %>
+    <ul class="errors">
+      <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+
+  <h2>Welcome <%= accountData.firstname %></h2>
+
+  <!-- Update account info link (shown to all users) -->
+  <p><a href="/account/update/<%= accountData.account_id %>">Update Account Information</a></p>
+   
+  <% if (accountData.account_type === 'Employee' || accountData.account_type === 'Admin') { %>
+    <h3>Inventory Management</h3>
+    <p><a href="/inv/management">Manage Inventory</a></p>
+  <% } %>
+
+  <p>You're logged in.</p>
+</main>

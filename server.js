@@ -6,6 +6,8 @@
 /* ***********************
  * Require Statements
  *************************/
+const jwt = require("jsonwebtoken");
+const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const pool = require('./database/');
 const express = require("express");
@@ -42,6 +44,26 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser())
+app.use(utilities.checkJWTToken)
+app.use((req, res, next) => {
+  const token = req.cookies.jwt;
+
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      res.locals.loggedin = true;
+      res.locals.firstname = decoded.firstname; // or use account.firstname
+      res.locals.accountType = decoded.account_type;
+    } catch (err) {
+      res.locals.loggedin = false;
+    }
+  } else {
+    res.locals.loggedin = false;
+  }
+
+  next();
+});
 
 // Middleware to make nav available to all views
 app.use(async (req, res, next) => {

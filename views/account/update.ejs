@@ -1,0 +1,51 @@
+<link rel="stylesheet"  href="/css/update.css">
+
+<main>
+    <h1><%= title %></h1>
+  
+    <% if (messages.error) { %>
+        <p class="flash-message-error"><%= messages.error %></p>
+      <% } %>
+    
+      <% if (messages.success) { %>
+        <p class="flash-message-success"><%= messages.success %></p>
+      <% } %>
+    <section>
+        <h2>Update Account</h2>
+        <form action="/account/update" method="post">
+          <label for="account_firstname">First Name</label>
+          <input type="text" id="account_firstname" name="account_firstname" required
+                 value="<%= typeof accountData.account_firstname !== 'undefined' ? accountData.account_firstname : '' %>">
+    
+          <label for="account_lastname">Last Name</label>
+          <input type="text" id="account_lastname" name="account_lastname" required
+                 value="<%= typeof accountData.account_lastname !== 'undefined' ? accountData.account_lastname : '' %>">
+    
+          <label for="account_email">Email</label>
+          <input type="email" id="account_email" name="account_email" required
+                 value="<%= typeof accountData.account_email !== 'undefined' ? accountData.account_email : '' %>">
+    
+          <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+    
+          <button type="submit">Update Account Info</button>
+        </form>
+    </section>
+    <section>
+        <h2>Change Password</h2>
+        <p>Enter a new password to change your current one. Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter, and 1 special character.</p>
+    
+        <form action="/account/update-password" method="post">
+        <label for="account_password">Password:</label>
+        <input type="password" id="account_password" name="account_password"  required pattern="(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#^]).{12,}" title="Password must be at least 12 characters long, contain at least 1 capital letter, 1 number, and 1 special character." data-trail="password">
+        <span id="pswd8tn">Show password</span>
+          
+          <input type="hidden" name="account_id" value="<%= accountData.account_id %>">
+    
+          <button type="submit">Change Password</button>
+        </form>
+    </section>
+    
+</main>
+    
+    
+  

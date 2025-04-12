@@ -109,4 +109,7 @@
       font-size: 1rem;
     }
   }
+  label {
+    color: #333; /* or any other color with sufficient contrast */
+  }
   

@@ -9,35 +9,19 @@ const validate = {}
   * ********************************* */
 validate.LoginRules = () => {
   return [
-    // First name is required and must be a string
-
-    // Valid email is required and must not already exist
     body("account_email")
       .trim()
       .isEmail()
-      .normalizeEmail() // Ensures proper email format
-      .withMessage("A valid email is required.")
-      .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email)
-        if (emailExists){
-          throw new Error("Email exists. Please log in or use different email")
-        }
-      }),
+      .normalizeEmail()
+      .withMessage("A valid email is required."),
 
-    // Password is required and must be strong
     body("account_password")
       .trim()
       .notEmpty()
-      .isStrongPassword({
-        minLength: 12,
-        minLowercase: 1,
-        minUppercase: 1,
-        minNumbers: 1,
-        minSymbols: 1,
-      })
-      .withMessage("Password must be at least 12 characters, with uppercase, lowercase, a number, and a symbol."),
+      .withMessage("Password cannot be empty.")
   ]
 }
+
 
 
   validate.checkLogData = async (req, res, next) => {

@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="/css/add-inventory.css">
+
+<!-- Flash Messages -->
+<% if (messages.error) { %>
+  <p class="flash-message-error"><%= messages.error %></p>
+<% } %>
+
+<% if (messages.success) { %>
+  <p class="flash-message-success"><%= messages.success %></p>
+<% } %>
+
+
+<h1><%= title %></h1>
+
+<p>⚠️ Confirm Deletion - This action is permanent and cannot be undone.</p>
+
+<form id="deleteForm" action="/inv/delete/<%= locals.inv_id %>" method="POST">
+  <!-- Hidden field to store the inventory ID -->
+  <!-- <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" /> -->
+
+  <label for="inv_make">Make:</label>
+  <input type="text" name="inv_make" id="inv_make" value="<%= inv_make %>" readonly />
+
+  <label for="inv_model">Model:</label>
+  <input type="text" name="inv_model" id="inv_model" value="<%= inv_model %>" readonly />
+
+  <label for="inv_year">Year:</label>
+  <input type="number" name="inv_year" id="inv_year" value="<%= inv_year %>" readonly />
+
+  <label for="inv_price">Price:</label>
+  <input type="number" name="inv_price" id="inv_price" value="<%= inv_price %>" readonly />
+
+  <button type="submit" class="delete-button">Delete Vehicle</button>
+  <!-- Hidden field to store the inventory ID -->
+  <input type="hidden" name="inv_id" value="<%= locals.inv_id %>" />
+</form>
