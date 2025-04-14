@@ -1,0 +1,8 @@
+<link rel="stylesheet"  href="/css/update.css">
+<h2>Deactivate Account</h2>
+<p>Are you sure you want to deactivate <strong><%= account.account_firstname %> <%= account.account_lastname %></strong>'s account?</p>
+<form action="/account/deactivate" method="POST">
+  <input type="hidden" name="account_id" value="<%= account.account_id %>">
+  <button type="submit">Yes, Deactivate</button>
+  <a href="/account/account-list">Cancel</a>
+</form>

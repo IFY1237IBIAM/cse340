@@ -27,6 +27,7 @@ router.get("/add-inventory", checkAccountType, invController.showAddInventory)
 router.get("/edit/:inv_id", checkAccountType, invController.showEditInventoryForm)
 
 
+
 // Admin-only route: Handle add classification POST
 // router.post("/add-classification",
 //   checkAccountType,

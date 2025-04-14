@@ -1,8 +1,8 @@
 CREATE TYPE public.account_type AS ENUM
-    ('client', 'Employee', 'Admin');
+    ('client', 'Employee ', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO database_page_user;
+    OWNER TO done_database_te6g_user;
 
 
 CREATE TABLE public.classification (

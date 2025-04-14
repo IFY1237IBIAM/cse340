@@ -1,0 +1,35 @@
+<link rel="stylesheet" href="/css/account-list.css">
+<main>
+  <h1 id="account-list-heading">Account List, UnAuthorized access prohibited. Admin Only</h1>
+  <table aria-labelledby="account-list-heading" class="account-table">
+    <caption class="sr-only">List of accounts with first name, last name, email, and account type</caption>
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Account Type</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if (accountList.length > 0) { %>
+        <% accountList.forEach(account => { %>
+          <tr>
+            <td data-label="First Name"><%= account.account_firstname %></td>
+            <td data-label="Last Name"><%= account.account_lastname %></td>
+            <td data-label="Email"><a href="mailto:<%= account.account_email %>"><%= account.account_email %></a></td>
+            <td data-label="Account Type"><%= account.account_type %></td>
+            <td data-label="Actions">
+              <a href="/account/confirm-deactivate/<%= account.account_id %>">Deactivate</a>
+            </td>
+          </tr>
+        <% }) %>
+      <% } else { %>
+        <tr>
+          <td colspan="5">No accounts found.</td>
+        </tr>
+      <% } %>
+    </tbody>
+  </table>
+</main>

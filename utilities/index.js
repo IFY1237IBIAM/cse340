@@ -137,4 +137,19 @@ Util.checkLogin = (req, res, next) => {
 /* ******************************
  * Exporting the Util object properly
  ****************************** */
+/* ****************************************
+ *  Check Account Type
+ * ************************************ */
+Util.checkAccountType = function (allowedTypes) {
+  return function (req, res, next) {
+    const accountData = res.locals.accountData;
+    if (accountData && allowedTypes.includes(accountData.account_type)) {
+      next();
+    } else {
+      req.flash("notice", "You do not have permission to access this page.");
+      return res.redirect("/account");
+    }
+  };
+};
+
 module.exports = Util;

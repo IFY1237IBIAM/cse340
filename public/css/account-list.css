@@ -1,0 +1,74 @@
+.account-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .account-table th,
+  .account-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .account-table th {
+    background-color: #f0f0f0;
+  }
+  
+  .account-table td {
+    background-color: #fff;
+  }
+  
+  .account-table th[scope="col"] {
+    font-weight: bold;
+  }
+  
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  
+  @media only screen and (max-width: 760px) {
+    .account-table,
+    .account-table thead,
+    .account-table tbody,
+    .account-table th,
+    .account-table td,
+    .account-table tr {
+      display: block;
+    }
+  
+    .account-table thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+  
+    .account-table tr {
+      border: 1px solid #ccc;
+    }
+  
+    .account-table td {
+      border: none;
+      border-bottom: 1px solid #ccc;
+      position: relative;
+      padding-left: 45%;
+    }
+  
+    .account-table td:before {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 200px;
+      padding-right: 10px;
+      white-space: nowrap;
+      content: attr(data-label);
+      font-weight: bold;
+    }
+  }
+  

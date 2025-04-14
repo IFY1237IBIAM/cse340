@@ -3,18 +3,27 @@ const pool = require("../database/"); // Import the database connection
 /* *****************************
 *   Register new account
 * *************************** */
+// async function registerAccount(account_firstname, account_lastname, account_email, account_password) {
+//   try {
+//     const sql = `
+//       INSERT INTO account (account_firstname, account_lastname, account_email, account_password, account_type)
+//       VALUES ($1, $2, $3, $4, 'client')
+//       RETURNING *`; // Returning all inserted data
+
+//     return await pool.query(sql, [account_firstname, account_lastname, account_email, account_password]);
+//   } catch (error) {
+//     return error.message;
+//   }
+// }
 async function registerAccount(account_firstname, account_lastname, account_email, account_password) {
   try {
-    const sql = `
-      INSERT INTO account (account_firstname, account_lastname, account_email, account_password, account_type)
-      VALUES ($1, $2, $3, $4, 'client')
-      RETURNING *`; // Returning all inserted data
-
+    const sql = `INSERT INTO account (account_firstname, account_lastname, account_email, account_password, account_type, account_active) VALUES ($1, $2, $3, $4, 'client', true) RETURNING *`;
     return await pool.query(sql, [account_firstname, account_lastname, account_email, account_password]);
   } catch (error) {
     return error.message;
   }
 }
+
 /* **********************
  *   Check for existing email
  * ********************* */
@@ -66,4 +75,56 @@ async function getAccountById(account_id) {
   return result.rows[0];
 }
 
-module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, updateAccountPassword, getAccountById }; // Export the function
+
+
+// async function getAllAccounts() {
+//   try {
+//     const result = await pool.query(
+//       'SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account ORDER BY account_lastname'
+//     );
+//     return result.rows;
+//   } catch (error) {
+//     console.error('getAllAccounts error:', error);
+//     throw new Error('Database error getting all accounts');
+//   }
+// }
+
+async function getAllAccounts() {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email, account_type FROM account WHERE account_active = true ORDER BY account_lastname'
+    );
+    return result.rows;
+  } catch (error) {
+    console.error('getAllAccounts error:', error);
+    throw new Error('Database error getting all accounts');
+  }
+}
+
+async function getAccountsByType(type) {
+  try {
+    const result = await pool.query(
+      'SELECT account_id, account_firstname, account_lastname, account_email FROM account WHERE account_type = $1',
+      [type]
+    );
+    return result.rows;
+  } catch (error) {
+    console.error('getAccountsByType error:', error);
+    throw new Error('Database error filtering accounts');
+  }
+}
+
+async function deactivateAccount(account_id) {
+  try {
+    const sql = `UPDATE account SET account_active = false WHERE account_id = $1`;
+    const result = await pool.query(sql, [account_id]);
+    return result.rowCount > 0;
+  } catch (error) {
+    console.error("Deactivate DB Error:", error);
+    throw error;
+  }
+}
+
+
+
+module.exports = { registerAccount, checkExistingEmail, getAccountByEmail, updateAccount, updateAccountPassword, getAccountById, getAllAccounts, getAccountsByType, deactivateAccount }; // Export the function

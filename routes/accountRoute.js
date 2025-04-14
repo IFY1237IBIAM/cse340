@@ -97,6 +97,17 @@ router.get("/manage", utilities.checkJWTToken, checkAccountType, utilities.handl
 
 router.get("/logout", utilities.handleErrors(accountController.logout));
 
+router.get("/account-list", utilities.handleErrors(accountController.buildAccountList));
+
+
+
+router.get("/confirm-deactivate/:account_id", utilities.checkJWTToken, utilities.checkLogin, utilities.checkAccountType(["Admin", "Employee"]), accountController.buildDeactivateConfirm);
+router.post("/deactivate", utilities.checkJWTToken, utilities.checkLogin, utilities.checkAccountType(["Admin", "Employee"]), accountController.deactivateAccount);
+// Confirmation page
+// Show confirmation page for deactivation
+
+
+
 // ===== Process Login and Registration =====
 router.post(
   "/register",

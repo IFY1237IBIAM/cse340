@@ -140,6 +140,24 @@ const buildAccountManagement = async function (req, res) {
     messages: req.flash()
   })
 }
+const buildAccountList = async (req, res) => {
+  try {
+    const nav = await utilities.getNav()
+    const accountList = await accountModel.getAllAccounts()
+
+    res.render("account/account-list", {
+      title: "All Accounts",
+      nav,
+      accountList,
+      messages: req.flash(),
+      errors: null
+    })
+  } catch (error) {
+    console.error("Error fetching account list:", error)
+    req.flash("notice", "Could not retrieve account list.")
+    res.redirect("/account")
+  }
+}
 
 const buildUpdateAccountForm = async (req, res) => {
   const nav = await utilities.getNav()
@@ -222,6 +240,37 @@ const logout = async (req, res) => {
   res.redirect("/");
 };
 
+async function buildDeactivateConfirm(req, res) {
+  const account_id = req.params.account_id;
+  const account = await accountModel.getAccountById(account_id);
+  if (!account) {
+    req.flash("notice", "Account not found.");
+    return res.redirect("/account/account-list");
+  }
+  res.render("account/confirm-deactivate", {
+    title: "Confirm Deactivation",
+    account,
+  });
+}
+
+async function deactivateAccount(req, res) {
+  const account_id = req.body.account_id;
+  try {
+    const success = await accountModel.deactivateAccount(account_id);
+    if (success) {
+      req.flash("notice", "Account successfully deactivated.");
+    } else {
+      req.flash("notice", "Deactivation failed.");
+    }
+    res.redirect("/account/account-list");
+  } catch (error) {
+    console.error("Deactivate Error:", error);
+    req.flash("notice", "An error occurred.");
+    res.redirect("/account/account-list");
+  }
+}
+
+
 
 
 
@@ -231,9 +280,12 @@ module.exports = {
   registerAccount, 
   accountLogin,
   buildAccountManagement,
+  buildAccountList,
   buildUpdateAccountForm,
   buildUpdateView,
+  buildDeactivateConfirm,
+  deactivateAccount,
   updateAccountInfo,
   updatePassword,
-  logout
+  logout,
 }
