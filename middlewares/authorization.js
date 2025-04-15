@@ -18,7 +18,7 @@ function checkAccountType(req, res, next) {
     const account_type = decoded.account_type;
     console.log('Account type:', account_type);
 
-    if (account_type === "Employee" || account_type === "Admin") {
+    if (account_type === "Employee" || account_type === "Admin" || account_type === "client") {
       // Authorized
       next();
     } else {
